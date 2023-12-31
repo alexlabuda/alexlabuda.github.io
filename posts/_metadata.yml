@@ -17,6 +17,10 @@ toc-depth: 3
 # Page layout: 
 page-layout: article
 
+format:
+  html:
+    include-after-body: ../footer.html
+
 # Post comments section
 comments: 
   utterances: 
