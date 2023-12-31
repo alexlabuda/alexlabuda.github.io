@@ -13,6 +13,10 @@ $gray-900: #212529 !default;
 $black:    #000 !default;
 
 $primary:  $gray-700 !default;
-$font-family-base:  'Source Sans Pro',  'Lato', 'Merriweather', 'Roboto Regular', 'Cabin Regular' !default;
-$body-color: $gray-700 !default;
-$headings-font-family:  'Merriweather', 'Roboto', 'Playfair Display', 'Montserrat'    !default;
+$font-family-base:  'Avenir', 'Source Sans Pro',  'Lato', 'Merriweather', 'Roboto Regular', 'Cabin Regular' !default;
+$body-color: $gray-800 !default;
+$headings-font-family:  'Avenir', 'Roboto', 'Merriweather',  'Playfair Display', 'Montserrat'    !default;
+
+$link-color: #E91E63;
+$link-hover-color: #E91E63;
+$toc-active-border: #E91E63;
