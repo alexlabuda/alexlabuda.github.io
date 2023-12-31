@@ -1,0 +1,26 @@
+[
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/post-with-code/index.html",
+      "/posts/ggplot2-tips/test-ggplot-series.html",
+      "/posts/test_blog_post/test_post.html",
+      "/posts/welcome/index.html"
+    ]
+  },
+  {
+    "listing": "/archive.html",
+    "items": [
+      "/posts/post-with-code/index.html",
+      "/posts/ggplot2-tips/test-ggplot-series.html",
+      "/posts/test_blog_post/test_post.html",
+      "/posts/welcome/index.html"
+    ]
+  },
+  {
+    "listing": "/ggplot-series.html",
+    "items": [
+      "/posts/ggplot2-tips/test-ggplot-series.html"
+    ]
+  }
+]
