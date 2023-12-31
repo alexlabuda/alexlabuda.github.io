@@ -4,6 +4,9 @@ project:
 website:
   title: "Alex Labuda" ## Add site URL below when you have one
   description: "Alex Labuda's personal blog and website"
+  page-navigation: true
+  back-to-top-navigation: false
+  
   navbar:
     right:
       - text: Blog
@@ -12,9 +15,16 @@ website:
         href: https://github.com/alexlabuda
       - icon: linkedin
         href: https://www.linkedin.com/in/alex-labuda/
+        
+  page-footer:
+    left: >-
+     &#169; 2023 Alex Labuda &#8729; Made with [Quarto](https://quarto.org)
+    right: >-
+      [Home](index.html) | [Blog](blog.html) | [About](about.html) | [Contact](contact.html)
+        
 format:
-  html:
-    theme: [sandstone, theme.scss]
+  html: 
+    theme: [journal, theme.scss]
 
 editor: source
 
