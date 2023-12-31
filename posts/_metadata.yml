@@ -14,5 +14,10 @@ author: 'Alex Labuda'
 toc: true
 toc-depth: 3
 
-# Page layout
+# Page layout: 
 page-layout: article
+
+# Post comments section
+comments: 
+  utterances: 
+    repo:  alexlabuda/blogComments 
