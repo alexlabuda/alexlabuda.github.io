@@ -14,8 +14,7 @@ website:
         href: https://www.linkedin.com/in/alex-labuda/
 format:
   html:
-    theme: flatly
-    css: styles.css
+    css: theme.scss
 
 editor: visual
 
