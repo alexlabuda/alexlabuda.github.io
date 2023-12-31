@@ -24,7 +24,7 @@ website:
         
 format:
   html: 
-    theme: [journal, theme.scss]
+    theme: [flatly, theme.scss]
 
 editor: source
 
