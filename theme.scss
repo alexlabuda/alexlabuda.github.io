@@ -68,9 +68,12 @@ $dropdown-link-hover-bg:            $gray-200 !default;
 $dropdown-link-active-color:        $dropdown-link-color !default;
 $dropdown-link-active-bg:           $dropdown-link-hover-bg !default;
 
+
 // Navs
 
-$nav-link-padding-x:                .9rem !default;
+$nav-link-height:                   3.5rem !default;
+$navbar-brand-font-size:            1.8rem !default;
+$nav-link-padding-x:                1rem !default;
 $nav-link-disabled-color:           $gray-300 !default;
 $nav-tabs-border-color:             $gray-300 !default;
 $nav-tabs-link-hover-border-color:  $gray-300 !default;
