@@ -7,6 +7,7 @@ image: me_small.jpg
 about:
   template: solana
   image-width: 36em
+  image-shape: rounded
   id: hero-heading
   links:
     - icon: linkedin
@@ -21,6 +22,7 @@ execute:
   freeze: false
   echo: false
   warning: false
+
 ---
 
 <br><br>

@@ -20,7 +20,7 @@ website:
     left: >-
      &#169; 2023 Alex Labuda &#8729; Made with [Quarto](https://quarto.org)
     right: >-
-      [Home](index.html) | [Blog](blog.html) | [About](about.html) | [Contact](contact.html)
+      [Home](index.html) | [Blog](blog.html)
         
 format:
   html: 

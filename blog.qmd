@@ -1,19 +1,33 @@
 ---
-title: "My blog"
+title: "A data science blog that works"
+description: |
+  Welcome to my Blog! Check back soon for new content.
+author: "Alex Labuda"
 listing:
   contents: posts
   sort: "date desc"
   type: default
   categories: false
-  sort-ui: true
+  sort-ui: false
   filter-ui: false
-  fields: [date, title, reading-time, description, categories, image]
-page-layout: full
+  fields: [date, title, description, categories, image]
+  page-size: 5
+comments: false
+format: 
+  html: 
+    page-layout: full
 title-block-banner: false
+
+header-includes: >
+  <link rel="stylesheet" href="~/Documents/alex_labuda/scripts/R/R_Studio_Posit/My-R-Projects/Quarto-Blog/assests/listing-defaults.css">
+resources:
+  - ~/Documents/alex_labuda/scripts/R/R_Studio_Posit/My-R-Projects/Quarto-Blog/assests/listing-defaults.css
 ---
 
 <!-- # Series -->
 
 <!-- ##### [ggplot2-series](ggplot-series.html) -->
+
 <!-- This series contains a great deal of tips, tricks and packages  -->
+
 <!-- that you can use to level up your ggplot game. -->

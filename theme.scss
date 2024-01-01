@@ -1,5 +1,6 @@
 /*-- scss:defaults --*/
 
+
 $white:    #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;
@@ -14,8 +15,21 @@ $black:    #000 !default;
 
 $primary:  $gray-800 !default;
 $font-family-base:  'Avenir', 'Source Sans Pro',  'Lato', 'Merriweather', 'Roboto Regular', 'Cabin Regular' !default;
-$body-color: $gray-800 !default;
-$headings-font-family:  "Helvetica Neue", 'Roboto', 'Merriweather',  'Playfair Display', 'Montserrat'    !default;
+$font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
+$body-color: $gray-900 !default;
+$headings-font-family:  "Alegreya Sans", 'Roboto', 'Merriweather',  'Playfair Display', 'Montserrat' !default;
+$h1-font-size:                $font-size-base * 2.8 !default;
+$headings-line-height:        1.5 !default;
 
 $link-color: #E91E63;
 $toc-active-border: #E91E63;
+$link-decoration: underline;
+
+/*-- scss:rules --*/
+/*
+#title-block-header.quarto-title-block.default .quarto-title .title {
+    font-family: $headings-font-family;
+    font-size: $font-size-base * 2.5;
+}
+
+*/
