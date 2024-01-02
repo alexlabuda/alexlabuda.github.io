@@ -1,0 +1,155 @@
+---
+title: "Exploring Global Fertility: A Journey Across Borders"
+subtitle: "Deciphering the Numbers: A Global Perspective on Birthrates and Beyond"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(wbstats)
+library(patchwork)
+
+theme_set(theme_minimal())
+
+# Get data from World Bank
+str(wb_cachelist, max.level = 1)
+fert_tbl <- wb_data("SP.DYN.TFRT.IN", start_date = 1900, end_date = 2020, country = "all")
+# Convert year to date object
+fert_tbl <- fert_tbl |> 
+  mutate(date = ymd(parse_date_time(date, "y")))
+```
+
+
+## Let's Explore the World Ferility Rates
+
+In a world bustling with over **seven billion people**, each individual represents a unique thread in the intricate tapestry of humanity. But beyond the surface of bustling streets and crowded cities lies a story told not through words, but through numbers - the **story of fertility rates**. This vital statistic, often overlooked, serves as a silent narrator of our times, speaking volumes about **societal trends, economic conditions, and cultural shifts.**
+
+As we embark on a journey across continents, we delve into the fascinating world of fertility rates. From the snow-capped villages of Scandinavia to the sun-drenched lands of Sub-Saharan Africa, we'll explore how these numbers shape nations, influence policies, and reflect the diverse tapestry of human existence.
+
+Join me as we unravel the tales hidden within these figures, **discovering not just the "how" and "what," but the profound "why" behind the fertility rates** of various countries. We'll look at how these rates are more than just numbers on a page; they are a reflection of healthcare access, gender equality, economic stability, and cultural norms.
+
+Through this exploration, we'll gain a deeper understanding of our world and its future, one number at a time.
+
+
+
+Plot the US birthrates through time
+
+```{r include=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
+# Create a function of the above plot code
+plot_line <- function(data, iso2c = "US", title = "United States",
+                      title_size = 10, hjust = 0,
+                      dot_size = 0.6, linewidth = 0.2) {
+  # Check if required columns exist in the data
+  if (!("iso2c" %in% names(data)) || !("date" %in% names(data)) || !("SP.DYN.TFRT.IN" %in% names(data))) {
+    stop("Data must contain 'iso2c', 'date', and 'SP.DYN.TFRT.IN' columns.")
+  }
+
+  # Filtering and plotting
+  plot <- data %>%
+    filter(iso2c == !!iso2c) %>%  # Correct filtering
+    ggplot(aes(x = date, y = SP.DYN.TFRT.IN)) +
+    geom_line(alpha = 0.7, linewidth = linewidth) +
+    geom_point(size = dot_size, alpha = 0.7) +
+    geom_smooth(
+      span = 0.9,
+      linewidth = linewidth,
+      linetype = 2,
+      se = FALSE,
+      color = "#E91E63"
+    ) +
+    labs(
+      x = "",
+      y = "",
+      title = title
+    ) +
+    theme(
+      plot.title      = element_text(size = title_size, face = "bold",
+                                     hjust = hjust),
+      axis.title      = element_text(size = 8, face = "bold"),
+      axis.text       = element_text(size = 8),
+      legend.position = "none",
+      panel.grid      = element_blank()
+    )
+
+  return(plot)
+}
+
+plot_line_small <- function(data, iso2c = "US", title = "United States",
+                      title_size = 10, hjust = 0,
+                      dot_size = 0.6, linewidth = 0.3) {
+  # Check if required columns exist in the data
+  if (!("iso2c" %in% names(data)) || !("date" %in% names(data)) || !("SP.DYN.TFRT.IN" %in% names(data))) {
+    stop("Data must contain 'iso2c', 'date', and 'SP.DYN.TFRT.IN' columns.")
+  }
+
+  # Filtering and plotting
+  plot <- data %>%
+    filter(iso2c == !!iso2c) %>%  # Correct filtering
+    ggplot(aes(x = date, y = SP.DYN.TFRT.IN)) +
+    geom_line(alpha = 0.9, linewidth = linewidth) +
+    # geom_point(size = dot_size, alpha = 0.7) +
+    # geom_smooth(
+    #   span = 0.9,
+    #   linewidth = linewidth,
+    #   linetype = 2,
+    #   se = FALSE,
+    #   color = "#E91E63"
+    # ) +
+    labs(
+      x = "",
+      y = "",
+      title = title
+    ) +
+    theme(
+      plot.title      = element_text(size = title_size, face = "bold",
+                                     hjust = hjust),
+      axis.title      = element_text(size = 8, face = "bold"),
+      axis.text       = element_text(size = 7),
+      legend.position = "none",
+      panel.grid      = element_blank()
+    )
+
+  return(plot)
+}
+```
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, out.width = "100%", fig.align = "center", fig.height=4}
+
+# United States
+line_us <- plot_line_small(fert_tbl, "US", "United States",
+                     hjust = 0.5)
+
+# China
+line_china <- plot_line_small(fert_tbl, "CN", "China",
+                        hjust = 0.5)
+
+# Japan
+line_japan <- plot_line_small(fert_tbl, "JP", "Japan",
+                        hjust = 0.5)
+
+# Russia
+line_russia <- plot_line_small(fert_tbl, "RU", "Russia",
+                         hjust = 0.5)
+
+# World
+line_world <- plot_line(fert_tbl, "1W", "World",
+                        title_size = 14, hjust = 0.5,
+                        dot_size = 1.2, linewidth = 0.4)
+
+```
+
+<br>
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, out.width = "100%", fig.align = "center", fig.height=6}
+line_world + 
+  (line_us + line_china + line_japan + line_russia) + 
+  plot_layout(nrow = 2) +
+  plot_annotation(
+    caption = "World Bank, World Development Indicators.\n2023. Fertility rate, total (births per woman).\nhttps://data.worldbank.org/indicator/SP.DYN.TFRT.IN",
+    theme = theme(plot.caption = element_text(size = 8, color = "gray35"))
+  )
+```
+
+

@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/ggplot-birthrates/ggplot-birthrates.html",
       "/posts/post-with-code/index.html",
       "/posts/ggplot2-tips/test-ggplot-series.html",
       "/posts/test_blog_post/test_post.html",
@@ -11,6 +12,7 @@
   {
     "listing": "/archive.html",
     "items": [
+      "/posts/ggplot-birthrates/ggplot-birthrates.html",
       "/posts/post-with-code/index.html",
       "/posts/ggplot2-tips/test-ggplot-series.html",
       "/posts/test_blog_post/test_post.html",
