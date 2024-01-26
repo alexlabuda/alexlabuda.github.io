@@ -1,9 +1,15 @@
 ---
-title: "Exploring Global Fertility: A Journey Across Borders"
-subtitle: "Deciphering the Numbers: A Global Perspective on Birthrates and Beyond"
+title: 'Exploring Global Fertility: A Journey Across Borders'
+date: '2023-12-25'
+categories: ['123', 'Second Tag']
+description: 'This is a test post. In this post, I try out different functionalities'
+execute: 
+  message: false
+  warning: false
 editor_options: 
   chunk_output_type: console
 ---
+
 
 ```{r setup, include=FALSE}
 library(tidyverse)
