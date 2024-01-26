@@ -3,8 +3,9 @@ title: "A data science blog that works"
 description: |
   Welcome to my Blog! Check back soon for new content.
 author: "Alex Labuda"
+image: "feature.jpeg"
 listing:
-  contents: posts
+  contents: posts/2024
   sort: "date desc"
   type: default
   categories: false
@@ -18,10 +19,6 @@ format:
     page-layout: full
 title-block-banner: false
 
-header-includes: >
-  <link rel="stylesheet" href="~/Documents/alex_labuda/scripts/R/R_Studio_Posit/My-R-Projects/Quarto-Blog/assests/listing-defaults.css">
-resources:
-  - ~/Documents/alex_labuda/scripts/R/R_Studio_Posit/My-R-Projects/Quarto-Blog/assests/listing-defaults.css
 ---
 
 <!-- # Series -->

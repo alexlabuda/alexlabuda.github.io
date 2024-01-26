@@ -1,0 +1,250 @@
+---
+title: "What's new in {gt} tables?"
+subtitle: "A look at my favorite new features in the {gt} package."
+date: '2024-01-25'
+categories: ['gt', 'tables', 'news']
+description: "In this post we will explore all my favorite new (and some old) features in {gt} tables"
+execute: 
+  message: false
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(gt)
+library(janitor)
+library(timetk)
+library(TTR)
+library(quantmod)
+
+getSymbols(
+  '^GSPC',
+  start = 20200101,
+  end   = 20240101,
+  freq  = 'monthly')
+
+GSPC <- GSPC |> 
+  fortify() |> 
+  tibble() |> 
+  rename(date = Index) |> 
+  clean_names()
+
+# Create a filter function
+my_filter_fn <- function(data, filter_year, by = "month") {
+  data |> 
+    filter(year(date) == filter_year) |>
+    summarise_by_time(.date_var   = date,
+                      .by         = by,
+                      close       = last(gspc_adjusted)) |> 
+    mutate(month_year = month(date, label = TRUE, abbr = TRUE))
+}
+
+# Get 2016 - 2020
+GSPC_2016 <- GSPC |>
+  my_filter_fn(filter_year = 2016)
+
+GSPC_2017 <- GSPC |>
+  my_filter_fn(filter_year = 2017)
+
+GSPC_2018 <- GSPC |>
+  my_filter_fn(filter_year = 2018)
+
+GSPC_2019 <- GSPC |>
+  my_filter_fn(filter_year = 2019)
+
+
+# Get only 2020
+GSPC_2020 <- GSPC |>
+  my_filter_fn(filter_year = 2020)
+
+# Get only 2021
+GSPC_2021 <- GSPC |> 
+  my_filter_fn(filter_year = 2021)
+
+# Get only 2022
+GSPC_2022 <- GSPC |> 
+  my_filter_fn(filter_year = 2022)
+
+# Get only 2023
+GSPC_2023 <- GSPC |> 
+  my_filter_fn(filter_year = 2023)
+
+spread_data_fn <- function(data) {
+  data |>
+    mutate(date = as.Date(date), year = lubridate::year(date)) %>%
+    select(-date) %>%
+    spread(key = month_year, value = close) |> 
+    rename_with(~ paste0("close_", .), -year)
+}
+
+GSPC_2016 <- GSPC_2016 |> 
+  spread_data_fn() 
+
+GSPC_2017 <- GSPC_2017 |> 
+  spread_data_fn()
+
+GSPC_2018 <- GSPC_2018 |> 
+  spread_data_fn()
+
+GSPC_2019 <- GSPC_2019 |> 
+  spread_data_fn()
+
+GSPC_2020 <- GSPC_2020 |> 
+  spread_data_fn()
+
+GSPC_2021 <- GSPC_2021 |> 
+  spread_data_fn()
+
+GSPC_2022 <- GSPC_2022 |> 
+  spread_data_fn()
+
+GSPC_2023 <- GSPC_2023 |> 
+  spread_data_fn()
+
+# Bind rows
+GSPC_2016_2023 <- bind_rows(
+  GSPC_2016, GSPC_2017, GSPC_2018, GSPC_2019,
+  GSPC_2020, GSPC_2021, GSPC_2022, GSPC_2023
+)
+
+towny_tbl <- gt::towny |> 
+  dplyr::select(
+    name, latitude, longitude,
+    land_area  = land_area_km2,
+    population = population_2021,
+    density    = density_2021
+  )
+```
+
+
+## What is {`gt`} tables?
+
+![](feature.jpeg)
+
+As we delve into the latest enhancements of the `gt` package in R, let's take a moment to appreciate what `gt` tables is and why it has become an indispensable tool for data scientists and analysts.
+
+`gt`, short for Grand Tables, is a powerful R package designed to create rich, customizable tables. It stands out in the R ecosystem for its ability to elegantly handle the presentation aspect of data analysis. With `gt`, users can transform basic data frames into professionally styled tables that are not only informative but also visually compelling.
+
+This package excels in its flexibility and ease of use, allowing for detailed adjustments to table formatting, style, and layout. It supports a variety of functionalities such as merging cells, adding footnotes, integrating conditional formatting, and much more, making it a versatile choice for a wide range of applications.
+
+As we explore the new features of `gt`, we will see how it continues to evolve, further enhancing its capabilities to meet the growing demands of data visualization and reporting in the R community.
+
+
+### Nanoplots, interactive plots in your **gt** table
+
+Nanoplots are compact, interactive visualizations designed for inclusion in gt tables. Their main features include:
+
+Compactness: Designed to be simple and space-efficient, suitable for embedding in tables.
+Basic Interactivity: Users can interact with the plots, like hovering over data points to see values.
+Variety of Plot Types: Supports different plot styles such as line, bar, and boxplot.
+Customizability: Offers options for customization, including formatting and labeling.
+The cols_nanoplot() function in gt is used to create nanoplots. It allows the selection of specific columns for data, which are then represented in the chosen plot style. These plots can display data compactly and interactively, making them a useful tool for enhancing the presentation of data within tables.
+
+```{r}
+GSPC_2016_2023 |>
+  arrange(-year) |>
+  gt(rowname_col = "year") |>
+  tab_header(
+    title    = md("**SP500** Performance, 2016 - 2024"),
+    subtitle = "Monthly Close Price from Yahoo Finance"
+    ) |>
+  tab_stubhead(label = md("**Year**")) |>
+  cols_nanoplot(
+    columns       = starts_with("close"),
+    new_col_name  = "nanoplots",
+    new_col_label = md("*Monthly Close Price*"),
+    options = nanoplot_options(
+      data_line_stroke_color = "#E91E63",
+      data_area_fill_color   = "#E91E63",
+      data_point_fill_color  = "#E91E63"
+      )
+  ) |>
+  cols_align(align = "center", columns = nanoplots) |>
+  tab_footnote(
+    footnote = "Source: Yahoo Finance",
+    locations = cells_column_labels(columns = nanoplots)
+  ) |> 
+  opt_align_table_header(align = "left") |>
+  tab_options(heading.padding = px(3)) |> 
+  tab_source_note(source_note = md(
+    "Data is sourced from `Yahoo Finance` using the **quantmod** package."
+  )) |> 
+  tab_options(table.width = pct(80))
+```
+
+You can hover over the nanoplots to see the values of the data points. If you hover over the left-most plot of the chart area you can also see the range of values in the plot.
+
+
+### Interactivity (...with style)
+
+```{r}
+towny_tbl_styled <-
+  towny_tbl |>
+  dplyr::arrange(desc(population)) |>
+  gt() |>
+  fmt_number(decimals = 1) |>
+  fmt_integer(population) |>
+  cols_label_with(
+    fn = ~ janitor::make_clean_names(., case = "title")
+  ) |>
+  data_color(
+    columns = density,
+    palette = "Reds"
+  ) |>
+  data_color(
+    columns = population,
+    palette = "Blues"
+  ) |>
+  tab_style(
+    style = cell_fill(color = "gray98"),
+    locations = cells_body(columns = c(latitude, longitude))
+  ) |>
+  tab_style(
+    locations = cells_body(columns = name),
+    style = cell_text(weight = "bold")
+  ) |>
+  opt_interactive(
+    use_filters = TRUE,
+    use_compact_mode = TRUE,
+    use_text_wrapping = FALSE
+  )
+
+## Adding a header and footer
+towny_tbl_header <-
+  towny_tbl_styled |>
+  tab_header(
+    title = md("**Population** and **Density** Data"),
+    subtitle = "Arranged from largest to smallest municipality"
+  ) |>
+  opt_align_table_header(align = "left") |>
+  tab_options(heading.padding = px(1))
+
+towny_tbl_header |>
+  tab_source_note(source_note = md(
+    "Data taken from the `towny` dataset in the **gt** package."
+  )) |>
+  tab_footnote(
+    footnote = "Density here is the population divided by
+    the land area.",
+    locations = cells_column_labels(columns = density)
+  ) |>
+  tab_footnote(
+    footnote = "Population values obtained from the 2021 census.",
+    locations = cells_column_labels(columns = population)
+  ) |>
+  opt_footnote_marks(marks = c("†", "‡")) |>
+  opt_footnote_spec(spec_ref = "i", spec_ftr = "i")
+```
+
+### Closing thoughts
+
+As we've explored some of the intriguing new features in the `gt` package, it's clear that `gt` tables are evolving into an even more powerful tool for data visualization and presentation. With innovations like nanoplots adding a new dimension of interactivity and visual appeal to our tables, the possibilities for data representation are expanding. The practicality of `gt` tables, combined with their increasing flexibility and style, makes them an essential part of any data scientist's toolkit.
+
+As this journey through the `gt` package's latest offerings comes to a close, remember that this is just the tip of the iceberg. Stay tuned for future posts where we'll dive deeper into the `gt` tables' feature set, uncovering more ways to bring data to life. Whether you're a seasoned data analyst or just starting out, the evolving landscape of `gt` tables promises to offer something new and exciting for everyone. Let's continue to explore and innovate together in the world of data visualization!
+
+
+
+
+
