@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "A data science blog that works",
     "section": "",
-    "text": "ggplot-birthrates\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nDec 30, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nThis is test post for a ggplot data viz series\n\n\n\n\n\n\n123\n\n\nSecond Tag\n\n\n\nThis is a test post. In this post, I try out different functionalities\n\n\n\n\n\nDec 30, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nThis is a dummy blog posts\n\n\n\n\n\n\n123\n\n\nSecond Tag\n\n\n\nThis is a test post. In this post, I try out different functionalities\n\n\n\n\n\nDec 30, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nDec 27, 2023\n\n\n\n\n\n\nNo matching items"
+    "text": "Exploring Global Fertility: A Journey Across Borders\n\n\nDeciphering the Numbers: A Global Perspective on Birthrates and Beyond\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhat’s new in {gt} tables 0.9.0?\n\n\nMy favorite {gt} tables features!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nDec 30, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nThis is test post for a ggplot data viz series\n\n\n\n\n\n\n123\n\n\nSecond Tag\n\n\n\nThis is a test post. In this post, I try out different functionalities\n\n\n\n\n\nDec 30, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nThis is a dummy blog posts\n\n\n\n\n\n\n123\n\n\nSecond Tag\n\n\n\nThis is a test post. In this post, I try out different functionalities\n\n\n\n\n\nDec 30, 2023\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nDec 27, 2023\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -26,6 +26,20 @@
     "title": "Post With Code",
     "section": "",
     "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "posts/ggplot-birthrates/ggplot-birthrates.html",
+    "href": "posts/ggplot-birthrates/ggplot-birthrates.html",
+    "title": "Exploring Global Fertility: A Journey Across Borders",
+    "section": "",
+    "text": "In a world bustling with over seven billion people, each individual represents a unique thread in the intricate tapestry of humanity. But beyond the surface of bustling streets and crowded cities lies a story told not through words, but through numbers - the story of fertility rates. This vital statistic, often overlooked, serves as a silent narrator of our times, speaking volumes about societal trends, economic conditions, and cultural shifts.\nAs we embark on a journey across continents, we delve into the fascinating world of fertility rates. From the snow-capped villages of Scandinavia to the sun-drenched lands of Sub-Saharan Africa, we’ll explore how these numbers shape nations, influence policies, and reflect the diverse tapestry of human existence.\nJoin me as we unravel the tales hidden within these figures, discovering not just the “how” and “what,” but the profound “why” behind the fertility rates of various countries. We’ll look at how these rates are more than just numbers on a page; they are a reflection of healthcare access, gender equality, economic stability, and cultural norms.\nThrough this exploration, we’ll gain a deeper understanding of our world and its future, one number at a time.\nPlot the US birthrates through time"
+  },
+  {
+    "objectID": "posts/ggplot-birthrates/ggplot-birthrates.html#lets-explore-the-world-ferility-rates",
+    "href": "posts/ggplot-birthrates/ggplot-birthrates.html#lets-explore-the-world-ferility-rates",
+    "title": "Exploring Global Fertility: A Journey Across Borders",
+    "section": "",
+    "text": "In a world bustling with over seven billion people, each individual represents a unique thread in the intricate tapestry of humanity. But beyond the surface of bustling streets and crowded cities lies a story told not through words, but through numbers - the story of fertility rates. This vital statistic, often overlooked, serves as a silent narrator of our times, speaking volumes about societal trends, economic conditions, and cultural shifts.\nAs we embark on a journey across continents, we delve into the fascinating world of fertility rates. From the snow-capped villages of Scandinavia to the sun-drenched lands of Sub-Saharan Africa, we’ll explore how these numbers shape nations, influence policies, and reflect the diverse tapestry of human existence.\nJoin me as we unravel the tales hidden within these figures, discovering not just the “how” and “what,” but the profound “why” behind the fertility rates of various countries. We’ll look at how these rates are more than just numbers on a page; they are a reflection of healthcare access, gender equality, economic stability, and cultural norms.\nThrough this exploration, we’ll gain a deeper understanding of our world and its future, one number at a time.\nPlot the US birthrates through time"
   },
   {
     "objectID": "posts/ggplot2-tips/test-ggplot-series.html",
@@ -88,7 +102,7 @@
     "href": "archive.html",
     "title": "Archive",
     "section": "",
-    "text": "ggplot-birthrates\n\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\n\n\nDec 30, 2023\n\n\n\n\n\n\n\nThis is test post for a ggplot data viz series\n\n\n\n\n\n\n\n\nDec 30, 2023\n\n\n\n\n\n\n\nThis is a dummy blog posts\n\n\n\n\n\n\n\n\nDec 30, 2023\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\n\nDec 27, 2023\n\n\n\n\n\n\nNo matching items"
+    "text": "Exploring Global Fertility: A Journey Across Borders\n\n\nDeciphering the Numbers: A Global Perspective on Birthrates and Beyond\n\n\n\n\n\n\n\n\n\n\nWhat’s new in {gt} tables 0.9.0?\n\n\nMy favorite {gt} tables features!\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\n\n\nDec 30, 2023\n\n\n\n\n\n\n\nThis is test post for a ggplot data viz series\n\n\n\n\n\n\n\n\nDec 30, 2023\n\n\n\n\n\n\n\nThis is a dummy blog posts\n\n\n\n\n\n\n\n\nDec 30, 2023\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\n\nDec 27, 2023\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "ggplot-series.html",
@@ -96,19 +110,5 @@
     "title": "Series: ggplot2-tips",
     "section": "",
     "text": "This is test post for a ggplot data viz series\n\n\n\n\n\nThis is a test post. In this post, I try out different functionalities\n\n\n\n\n\nDec 30, 2023\n\n\n3 min\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/ggplot-birthrates/ggplot-birthrates.html",
-    "href": "posts/ggplot-birthrates/ggplot-birthrates.html",
-    "title": "Exploring Global Fertility: A Journey Across Borders",
-    "section": "",
-    "text": "In a world bustling with over seven billion people, each individual represents a unique thread in the intricate tapestry of humanity. But beyond the surface of bustling streets and crowded cities lies a story told not through words, but through numbers - the story of fertility rates. This vital statistic, often overlooked, serves as a silent narrator of our times, speaking volumes about societal trends, economic conditions, and cultural shifts.\nAs we embark on a journey across continents, we delve into the fascinating world of fertility rates. From the snow-capped villages of Scandinavia to the sun-drenched lands of Sub-Saharan Africa, we’ll explore how these numbers shape nations, influence policies, and reflect the diverse tapestry of human existence.\nJoin me as we unravel the tales hidden within these figures, discovering not just the “how” and “what,” but the profound “why” behind the fertility rates of various countries. We’ll look at how these rates are more than just numbers on a page; they are a reflection of healthcare access, gender equality, economic stability, and cultural norms.\nThrough this exploration, we’ll gain a deeper understanding of our world and its future, one number at a time.\nPlot the US birthrates through time"
-  },
-  {
-    "objectID": "posts/ggplot-birthrates/ggplot-birthrates.html#lets-explore-the-world-ferility-rates",
-    "href": "posts/ggplot-birthrates/ggplot-birthrates.html#lets-explore-the-world-ferility-rates",
-    "title": "Exploring Global Fertility: A Journey Across Borders",
-    "section": "",
-    "text": "In a world bustling with over seven billion people, each individual represents a unique thread in the intricate tapestry of humanity. But beyond the surface of bustling streets and crowded cities lies a story told not through words, but through numbers - the story of fertility rates. This vital statistic, often overlooked, serves as a silent narrator of our times, speaking volumes about societal trends, economic conditions, and cultural shifts.\nAs we embark on a journey across continents, we delve into the fascinating world of fertility rates. From the snow-capped villages of Scandinavia to the sun-drenched lands of Sub-Saharan Africa, we’ll explore how these numbers shape nations, influence policies, and reflect the diverse tapestry of human existence.\nJoin me as we unravel the tales hidden within these figures, discovering not just the “how” and “what,” but the profound “why” behind the fertility rates of various countries. We’ll look at how these rates are more than just numbers on a page; they are a reflection of healthcare access, gender equality, economic stability, and cultural norms.\nThrough this exploration, we’ll gain a deeper understanding of our world and its future, one number at a time.\nPlot the US birthrates through time"
   }
 ]
