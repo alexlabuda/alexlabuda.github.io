@@ -146,7 +146,7 @@ Nanoplots are compact, interactive visualizations designed for inclusion in `gt`
 
 The `cols_nanoplot`() function in `gt` is used to create nanoplots. It allows the selection of specific columns for data, which are then represented in the chosen plot style. These plots can display data compactly and interactively, making them a useful tool for enhancing the presentation of data within tables.
 
-Below is an example of a nanoplot (`plot_tyle = "line"`) in a `gt` table. The plot shows the monthly close price of the S&P 500 from 2016 to 2023.
+Below is an example of a nanoplot (`plot_style = "line"`) in a `gt` table. The plot shows the monthly close price of the S&P 500 from 2016 to 2023.
 
 ::: {.callout-tip collapse=false}
 ## Hover to reveal data points!
@@ -159,7 +159,7 @@ GSPC_2016_2023 |>
   arrange(-year) |>
   gt(rowname_col = "year") |>
   tab_header(
-    title    = md("**SP500** Performance, 2016 - 2024"),
+    title    = md("**SP500** performance by month, 2016 - 2024"),
     subtitle = "Monthly Close Price from Yahoo Finance"
     ) |>
   tab_stubhead(label = md("**Year**")) |>
@@ -183,7 +183,7 @@ GSPC_2016_2023 |>
   tab_source_note(source_note = md(
     "Data is sourced from `Yahoo Finance` using the **quantmod** package."
   )) |> 
-  tab_options(table.width = pct(80))
+  tab_options(table.width = pct(60))
 ```
 
 
