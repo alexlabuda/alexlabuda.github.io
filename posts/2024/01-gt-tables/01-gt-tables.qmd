@@ -140,7 +140,9 @@ Nanoplots are compact, interactive visualizations designed for inclusion in `gt`
 
 -   **Compactness**: Designed to be simple and space-efficient, suitable for embedding in tables.
 
--   **Basic Interactivity**: Users can interact with the plots, like hovering over data points to see values. Variety of Plot Types: Supports different plot styles such as line, bar, and boxplot.
+-   **Basic Interactivity**: Users can interact with the plots, like hovering over data points to see values. 
+
+-   **Variety of Plot Types**: Supports different plot styles such as line, bar, and boxplot.
 
 -   **Customizability**: Offers options for customization, including formatting and labeling.
 
