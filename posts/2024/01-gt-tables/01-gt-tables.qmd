@@ -258,7 +258,7 @@ bind_cols(
 
 ## Interactivity (...with style)
 
-In the latest update of the `gt` package (version 0.9.0), a significant new feature is the introduction of interactive HTML tables. This advancement transforms the way tables are created and interacted with in R, offering a more dynamic and engaging user experience. With this update, `gt` tables become not just a means of displaying data, but an interactive tool for data exploration and presentation. This enhancement aligns with the ongoing evolution of `gt` as a comprehensive solution for data visualization in R, catering to the growing demands for interactivity in data presentation.
+Another significant new feature is the introduction of interactive HTML tables. This advancement transforms the way tables are created and interacted with in R, offering a more dynamic and engaging user experience. With this update, `gt` tables become not just a means of displaying data, but an interactive tool for data exploration and presentation. This enhancement aligns with the ongoing evolution of `gt` as a comprehensive solution for data visualization in R, catering to the growing demands for interactivity in data presentation.
 
 ```{r}
 towny_tbl_styled <-
