@@ -146,6 +146,8 @@ Nanoplots are compact, interactive visualizations designed for inclusion in `gt`
 
 The `cols_nanoplot`() function in `gt` is used to create nanoplots. It allows the selection of specific columns for data, which are then represented in the chosen plot style. These plots can display data compactly and interactively, making them a useful tool for enhancing the presentation of data within tables.
 
+### Line plots
+
 Below is an example of a nanoplot (`plot_style = "line"`) in a `gt` table. The plot shows the monthly close price of the S&P 500 from 2016 to 2023.
 
 ::: {.callout-tip collapse=false}
@@ -186,6 +188,72 @@ GSPC_2016_2023 |>
   tab_options(table.width = pct(60))
 ```
 
+### Boxplots
+
+Among these, the "boxplot" nano plot is particularly useful for summarizing data distributions directly within a table cell. This feature enhances the ability to visualize and compare distributions across different groups or categories, providing a more intuitive and immediate understanding of the data. For more details, you can visit the Posit blog.
+
+::: {.callout-tip collapse=false}
+## Hover to reveal data points!
+
+You can hover over the boxplots below to see the values of the data points.
+:::
+
+```{r}
+bind_cols(
+  palmerpenguins::penguins |> 
+  drop_na() |>
+  summarize(bill_length_mm = paste(bill_length_mm, collapse = ","), .by = species),
+  palmerpenguins::penguins |> 
+  drop_na() |>
+  summarize(bill_depth_mm = paste(bill_depth_mm, collapse = ","), .by = species) |> 
+    select(-species),
+  palmerpenguins::penguins |> 
+  drop_na() |>
+  summarize(flipper_length_mm = paste(flipper_length_mm, collapse = ","), .by = species) |> 
+    select(-species),
+  palmerpenguins::penguins |> 
+  drop_na() |>
+  summarize(body_mass_g = paste(body_mass_g, collapse = ","), .by = species) |> 
+    select(-species)
+  ) |> 
+  rename(Species = species) |> 
+  gt() |> 
+  cols_nanoplot(
+    columns   = bill_length_mm,
+    plot_type = "boxplot",
+    new_col_name = "Bill Length (mm)",
+    new_col_label = "Bill Length (mm)"
+  ) |> 
+  cols_nanoplot(
+    columns   = bill_depth_mm,
+    plot_type = "boxplot",
+    new_col_name = "Bill Depth (mm)",
+    new_col_label = "Bill Length (mm)"
+  ) |> 
+  cols_nanoplot(
+    columns   = flipper_length_mm,
+    plot_type = "boxplot",
+    new_col_name = "Flipper Length (mm)",
+    new_col_label = "Bill Length (mm)"
+  ) |> 
+  cols_nanoplot(
+    columns   = body_mass_g,
+    plot_type = "boxplot",
+    new_col_name = "Body Mass (mm)",
+    new_col_label = "Bill Length (mm)"
+  ) |> 
+  tab_header(
+    title = md("**Comparative Anatomy of Penguin Species**"),
+    subtitle = "Boxplot Analysis of Bill, Flipper, and Body Measurements"
+  ) |>
+  opt_align_table_header(align = "left") |>
+  tab_options(heading.padding = px(5),
+              data_row.padding = px(12),
+              row.striping.background_color = "white") |> 
+  tab_source_note(source_note = md(
+    "Data taken from the `penguins` dataset in the **palmerspenguins** package."
+  ))
+```
 
 
 ## Interactivity (...with style)
@@ -204,11 +272,11 @@ towny_tbl_styled <-
   ) |>
   data_color(
     columns = density,
-    palette = "Reds"
+    palette = "Blues"
   ) |>
   data_color(
     columns = population,
-    palette = "Blues"
+    palette = "Reds"
   ) |>
   tab_style(
     style = cell_fill(color = "gray98"),
@@ -250,6 +318,8 @@ towny_tbl_header |>
   opt_footnote_marks(marks = c("†", "‡")) |>
   opt_footnote_spec(spec_ref = "i", spec_ftr = "i")
 ```
+
+
 
 ## Closing thoughts
 
