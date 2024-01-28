@@ -228,19 +228,19 @@ bind_cols(
     columns   = bill_depth_mm,
     plot_type = "boxplot",
     new_col_name = "Bill Depth (mm)",
-    new_col_label = "Bill Length (mm)"
+    new_col_label = "Bill Depth (mm)"
   ) |> 
   cols_nanoplot(
     columns   = flipper_length_mm,
     plot_type = "boxplot",
     new_col_name = "Flipper Length (mm)",
-    new_col_label = "Bill Length (mm)"
+    new_col_label = "Flipper Length (mm)"
   ) |> 
   cols_nanoplot(
     columns   = body_mass_g,
     plot_type = "boxplot",
     new_col_name = "Body Mass (mm)",
-    new_col_label = "Bill Length (mm)"
+    new_col_label = "Body Mass (mm)"
   ) |> 
   tab_header(
     title = md("**Comparative Anatomy of Penguin Species**"),
