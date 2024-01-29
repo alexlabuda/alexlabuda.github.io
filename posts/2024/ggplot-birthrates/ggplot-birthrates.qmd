@@ -8,6 +8,10 @@ execute:
   warning: false
 editor_options: 
   chunk_output_type: console
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
 ---
 
 
@@ -41,7 +45,7 @@ Through this exploration, we'll gain a deeper understanding of our world and its
 
 Plot the US birthrates through time
 
-```{r include=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
+```{r warning=FALSE, message=FALSE}
 # Create a function of the above plot code
 plot_line <- function(data, iso2c = "US", title = "United States",
                       title_size = 10, hjust = 0,
@@ -121,7 +125,7 @@ plot_line_small <- function(data, iso2c = "US", title = "United States",
 ```
 
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, out.width = "100%", fig.align = "center", fig.height=4}
+```{r warning=FALSE, message=FALSE, out.width = "100%", fig.align = "center", fig.height=4}
 
 # United States
 line_us <- plot_line_small(fert_tbl, "US", "United States",
