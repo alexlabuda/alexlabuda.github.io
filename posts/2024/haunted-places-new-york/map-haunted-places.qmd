@@ -1,0 +1,87 @@
+---
+title: "Mapping Haunted Places in New York"
+subtitle: "Exploring Eerie Locations with Interactive Leaflet Maps"
+date: '2024-01-29'
+categories: ['Data Visualization', 'Leaflet', 'New York']
+description: "Join us on a spine-tingling journey as we map out the most haunted places in New York, combining fascinating tales with interactive data visualization."
+execute: 
+  message: false
+  warning: false
+editor_options: 
+  chunk_output_type: console
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+---
+
+```{r setup, include=FALSE}
+library(leaflet)
+library(tidyverse)
+
+
+tuesdata <- tidytuesdayR::tt_load("2023-10-10")
+haunted_places <- tuesdata$haunted_places
+
+plot_data <- haunted_places |>
+  filter(state == "New York") |>
+  drop_na() |>
+  select(-c(starts_with("city_"), city, country, state_abbrev))
+
+## Filtering Lats and Longs that are not in NY
+
+# Define New York State's approximate latitude and longitude boundaries
+ny_lat_min <- 40.5
+ny_lat_max <- 45.0
+ny_lon_min <- -79.8
+ny_lon_max <- -71.8
+
+# Filter data for rows where latitude and longitude fall within the NY boundaries
+filtered_data <- plot_data %>%
+  filter(latitude >= ny_lat_min & latitude <= ny_lat_max & 
+           longitude >= ny_lon_min & longitude <= ny_lon_max)
+
+
+plot_data_formatted <- 
+  filtered_data |> 
+  mutate(
+    pop_ups = paste0(state, ", ", sep = "<br/>", "Location: ", location, sep = "<br/>", sep = "<br/>", "Description: ", description)
+  )
+
+```
+
+## Haunted Place of New York
+
+![](feature.jpeg)
+
+>“There are things that are not of this world, mysterious phenomena that defy explanation. These are the tales of the haunted places in New York.” <br/>- Inspired by H.P. Lovecraft
+
+New York, a city known for its towering skyscrapers and bustling streets, also harbors a less spoken-about aspect: its haunted past. From eerie mansions to historic landmarks, the state of New York is rich with locations that are said to be home to unexplained phenomena and ghostly presences.
+
+In this blog post, we dive into the intriguing world of the paranormal by mapping out some of the most haunted places in New York. Using data visualization techniques with the Leaflet package in R, we bring these chilling tales to life. Each point on the map not only marks a location but also tells the story of its haunting, offering a unique glimpse into the mysterious and the unexplained.
+
+As you explore the map, be prepared to uncover the hidden and eerie side of New York. Each marker is a doorway to a story that blurs the line between reality and the supernatural.
+
+So, let's embark on this spine-tingling journey and discover what secrets lie in the haunted corners of New York.
+
+::: {.callout-tip collapse=false}
+## Click red points to read more!
+
+Click red points to read more information about the haunted. Click or zoom in and out on yellow and green clusters to reveal more data points.
+:::
+
+
+```{r fig.width=10, fig.height=10}
+leaflet(plot_data_formatted) %>% 
+  addTiles() %>% 
+  addCircleMarkers(
+    lng = ~longitude, lat = ~latitude, popup = ~pop_ups,
+    radius = 8, # Adjust the size of the circle
+    color = "darkred", # Border color
+    fillColor = "darkred", # Fill color
+    fillOpacity = 0.5, # Fill opacity
+    clusterOptions = markerClusterOptions(transparent = TRUE)
+  ) %>% 
+  addProviderTiles(providers$CartoDB.Positron)
+```
+
