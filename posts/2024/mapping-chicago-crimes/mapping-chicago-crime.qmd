@@ -1,0 +1,100 @@
+---
+title: "Visualizing Crime Patterns in Chicago: An Insightful 2015 Retrospective"
+subtitle: "From Numbers to Maps: Decoding Chicago's Crime Data"
+date: '2024-01-30'
+categories: ['gt', 'tables', 'news']
+description: "Dive into an analytical exploration of Chicago's 2015 crime data using interactive maps and dynamic tables, bringing numbers to life."
+execute: 
+  message: false
+  warning: false
+editor_options: 
+  chunk_output_type: console
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+---
+
+```{r setup, include=FALSE}
+# LIBRARIES ---------------------------------------------------------------
+
+library(leaflet)
+library(tidyverse)
+library(janitor)
+
+# Set max zoom out for leaflet
+# Set value for the minZoom and maxZoom settings.
+# leaflet(options = leafletOptions(minZoom = 10, maxZoom = 18))
+
+# DATA --------------------------------------------------------------------
+
+chicago_crime_tbl <- read_csv("data/Chicago_Crimes__2012_Present.csv")
+
+chicago_crime_tbl <- chicago_crime_tbl |> 
+  clean_names() |> 
+  drop_na() |> 
+  mutate(
+    date = mdy_hm(date)
+  )
+
+
+# get only years = 2015
+set.seed(123)
+chicago_crime_tbl <- chicago_crime_tbl |> 
+  mutate(year = year(date)) |>
+  filter(year == 2015) |> 
+  slice_sample(n = 50000)
+
+
+# Group by Latitude and Longitude and count the number of crimes
+crimes_preprocess_tbl <- chicago_crime_tbl |> 
+  select(latitude, longitude, primary_type) |> 
+  group_by(latitude, longitude) |> 
+  summarise(
+    n = n(),
+    # Get the most frequent `Primary Type` per Latitude and Longitude
+    # most_frequent_primary_type = names(which.max(table(primary_type)))
+    primary_type = primary_type[which.max(n)]
+  ) |>
+  ungroup() |> 
+  arrange(desc(n))
+
+crimes_preprocess_tbl <- crimes_preprocess_tbl |> 
+  mutate(
+    text = paste0("Number of Crimes: ", n, "<br>", "Primary Type: ", primary_type)
+    )
+
+```
+
+## 2015 Chicago Crimes: Mere data or deep insights?
+
+*[WORK IN PROGRESS]* 
+
+![](feature.png)
+
+Welcome to a deep dive into the world of data visualization and analysis, focusing on one of the most pressing urban issues: crime. In this blog post, we're going to explore the intricate patterns of crime in Chicago for the year 2015. Leveraging the power of Leaflet for interactive mapping and the versatility of {gt} tables, we'll uncover the hidden stories behind the numbers.
+
+This journey isn't just about numbers and statistics; it's about understanding the geographic distribution and frequency of various types of crimes in one of America's largest cities. We'll visualize this data in a way that's both insightful and accessible, even if you're not a data scientist. From the most common crimes to the hotspots of criminal activities, our analysis will provide a comprehensive look at the crime landscape of Chicago in 2015.
+
+So, whether you're a data enthusiast, a policy maker, a Chicago resident, or simply curious, join us as we map out the contours of crime in the Windy City, discovering patterns and insights that could inform future strategies and solutions.
+
+
+```{r leaflet, out.height=10, out.width=8}
+# LEAFLET -----------------------------------------------------------------
+
+leaflet(crimes_preprocess_tbl) %>% 
+  addTiles() %>% 
+  # weight circle size by n
+  addCircleMarkers(
+    lng = ~longitude, 
+    lat = ~latitude, 
+    radius = ~n * 0.5, 
+    color = "red", 
+    stroke = FALSE, 
+    fillOpacity = 0.23,
+    popup = ~text
+  ) |> 
+  # add dark providertile
+  addProviderTiles("CartoDB.DarkMatter")
+```
+

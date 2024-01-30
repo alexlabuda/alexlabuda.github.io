@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/2024/mapping-chicago-crimes/mapping-chicago-crime.html",
       "/posts/2024/haunted-places-new-york/map-haunted-places.html",
       "/posts/2024/01-gt-tables/01-gt-tables.html",
       "/posts/2024/ggplot-birthrates/ggplot-birthrates.html"
@@ -10,6 +11,7 @@
   {
     "listing": "/archive.html",
     "items": [
+      "/posts/2024/mapping-chicago-crimes/mapping-chicago-crime.html",
       "/posts/2024/haunted-places-new-york/map-haunted-places.html",
       "/posts/2024/01-gt-tables/01-gt-tables.html",
       "/posts/post-with-code/index.html",
