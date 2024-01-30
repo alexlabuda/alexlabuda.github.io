@@ -1,0 +1,53 @@
+{
+  "posts/test_blog_post/test_post.qmd": {
+    "test_post.html": "3b49af4f"
+  },
+  "posts/post-with-code/index.qmd": {
+    "index.html": "49e2106c"
+  },
+  "posts/welcome/index.qmd": {
+    "index.html": "d343250e"
+  },
+  "blog.qmd": {
+    "blog.html": "cff10e5d"
+  },
+  "index.qmd": {
+    "index.html": "6526d7f3"
+  },
+  "archive.qmd": {
+    "archive.html": "00651225"
+  },
+  "posts/ggplot2-tips/test-ggplot-series.qmd": {
+    "test-ggplot-series.html": "a378339c"
+  },
+  "ggplot-series.qmd": {
+    "ggplot-series.html": "a42f36b0"
+  },
+  "404.qmd": {
+    "404.html": "d9d4d7f3"
+  },
+  "posts/ggplot-birthrates/ggplot-birthrates.qmd": {
+    "ggplot-birthrates.html": "b344c176"
+  },
+  "posts/01-gt-tables/01-gt-tables.qmd": {
+    "01-gt-tables.html": "49ad2f4b"
+  },
+  "posts/2024/ggplot-birthrates/ggplot-birthrates.qmd": {
+    "ggplot-birthrates.html": "d46a4be4"
+  },
+  "posts/2024/01-gt-tables/01-gt-tables.qmd": {
+    "01-gt-tables.html": "b2271077"
+  },
+  "posts/test_blog_post/haunted-places.qmd": {
+    "haunted-places.html": "e78443a6"
+  },
+  "posts/2024/haunted-places/haunted-places-ny.qmd": {
+    "haunted-places-ny.html": "9379b548"
+  },
+  "posts/2024/haunted-places-new-york/map-haunted-places.qmd": {
+    "map-haunted-places.html": "9c146673"
+  },
+  "posts/2024/mapping-chicago-crimes/mapping-chicago-crime.qmd": {
+    "mapping-chicago-crime.html": "f35a3f7f"
+  }
+}

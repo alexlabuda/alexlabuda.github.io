@@ -4,3 +4,5 @@
 .Ruserdata
 .DS_Store
 /.quarto/posts/2024/mapping-chicago-crimes/data/*
+
+/.quarto/

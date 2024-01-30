@@ -1,0 +1,13 @@
+{
+  "listingMap": {
+    "archive.qmd": [
+      "posts"
+    ],
+    "ggplot-series.qmd": [
+      "posts/ggplot2-tips"
+    ],
+    "blog.qmd": [
+      "posts/2024"
+    ]
+  }
+}
