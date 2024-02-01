@@ -21,14 +21,16 @@ format:
 library(leaflet)
 library(tidyverse)
 library(janitor)
+library(gt)
 
+theme_set(theme_minimal())
 # Set max zoom out for leaflet
 # Set value for the minZoom and maxZoom settings.
 # leaflet(options = leafletOptions(minZoom = 10, maxZoom = 18))
 
 # DATA --------------------------------------------------------------------
 
-chicago_crime_tbl <- read_csv("data/Chicago_Crimes__2012_Present.csv")
+chicago_crime_tbl <- read_csv("/Users/alex.labuda/Library/CloudStorage/OneDrive-ZionandZion/Documents/Data/Other Data/Chicago_Crimes__2012_Present.csv")
 
 chicago_crime_tbl <- chicago_crime_tbl |> 
   clean_names() |> 
@@ -37,13 +39,18 @@ chicago_crime_tbl <- chicago_crime_tbl |>
     date = mdy_hm(date)
   )
 
+chicago_crime_full_tbl <- chicago_crime_tbl |> 
+  mutate(year = year(date)) |> 
+  # remove year == "2016"
+  filter(year != 2016)
+
 
 # get only years = 2015
 set.seed(123)
 chicago_crime_tbl <- chicago_crime_tbl |> 
   mutate(year = year(date)) |>
   filter(year == 2015) |> 
-  slice_sample(n = 50000)
+  slice_sample(n = 30000)
 
 
 # Group by Latitude and Longitude and count the number of crimes
@@ -79,6 +86,108 @@ This journey isn't just about numbers and statistics; it's about understanding t
 So, whether you're a data enthusiast, a policy maker, a Chicago resident, or simply curious, join us as we map out the contours of crime in the Windy City, discovering patterns and insights that could inform future strategies and solutions.
 
 
+## The Most Common Crimes in Chicago (2015)
+
+```{r include=FALSE}
+# Get top 10 crimes
+top_10_crimes_list <- chicago_crime_full_tbl |> 
+  count(primary_type, sort = TRUE) |> 
+  head(10) |> 
+  pull(primary_type)
+
+# Filter the top 10 crimes
+chicago_crime_wide_tbl <- chicago_crime_full_tbl |> 
+  filter(primary_type %in% top_10_crimes_list) |> 
+  arrange(date) |> 
+  mutate(
+    date       = as.Date(date),
+    month_year = format(date, "%b %Y")
+    ) |>
+  # group by primary_type, year and count crimes
+  group_by(primary_type, year) |>
+  summarise(n = n()) |>
+  ungroup() |>
+  # arrange(desc(n)) |> 
+  # pivot_wider displaying year as columns
+  pivot_wider(names_from = year, values_from = n, values_fill = 0) |>
+  # add a total column
+  mutate(total = rowSums(across(where(is.numeric)))) |> 
+  select(primary_type, total, everything()) |> 
+  rename(Total = total)
+```
+
+
+
+```{r fig.width=7}
+# Calculate the maximum n value with an offset
+max_n_offset <- chicago_crime_full_tbl %>% 
+  count(primary_type, sort = TRUE) %>% 
+  head(10) %>% 
+  summarise(max_n = max(n) * 1.10) %>% 
+  pull(max_n)
+
+chicago_crime_full_tbl |> 
+  # bar plot of most frequent crimes
+  count(primary_type, sort = TRUE) |>
+  head(10) |>
+  ggplot(aes(x = fct_reorder(primary_type, n), y = n)) +
+  # Add data labels
+  geom_text(aes(label = scales::comma(n)), hjust = -0.1, size = 3) +
+  scale_y_continuous(
+    labels = scales::comma, 
+    limits = c(0, max_n_offset)
+    ) +
+  geom_col(fill = "red", color = "darkred", alpha = 0.05, linewidth = 0.2) +
+  coord_flip() +
+  labs(
+    title = NULL,
+    x     = NULL,
+    y     = "Number of Crimes"
+  ) +
+  theme(
+    panel.grid = element_blank(),
+    plot.title = element_text(size = 13, hjust = -0.3),
+    axis.title.x = element_text(size = 11, vjust = -0.2)
+  )
+```
+
+
+## How do the top 10 crimes compare over the years?
+
+```{r}
+chicago_crime_wide_tbl |>
+  arrange(desc(Total)) |>
+  gt(rowname_col = "primary_type") |>
+  tab_header(
+    title    = md("**TOP 10** Crime types in Chicago"),
+    subtitle = "By year (2012 - 2015)"
+    ) |>
+  tab_stubhead(label = md("**Crime Type**")) |>
+  cols_nanoplot(
+    columns       = -starts_with(c("primary_type", "Total")),
+    new_col_name  = "nanoplots",
+    new_col_label = md("*2012 - 2015*"),
+    options = nanoplot_options(
+      data_line_stroke_color = "#E91E63",
+      data_area_fill_color   = "#E91E63",
+      data_point_fill_color  = "#E91E63"
+      )
+  ) |>
+  # comma format total column
+  fmt_number(
+    columns = Total,
+    decimals = 0
+  ) |>
+  cols_align(align = "center", columns = nanoplots) |>
+  opt_align_table_header(align = "left") |>
+  tab_options(heading.padding = px(3)) |> 
+  tab_options(table.width = pct(60))
+```
+
+
+
+## Mapping Chicago's Crime Hotspots
+
 ```{r leaflet, out.height=10, out.width=8}
 # LEAFLET -----------------------------------------------------------------
 
@@ -91,7 +200,7 @@ leaflet(crimes_preprocess_tbl) %>%
     radius = ~n * 0.5, 
     color = "red", 
     stroke = FALSE, 
-    fillOpacity = 0.23,
+    fillOpacity = 0.28,
     popup = ~text
   ) |> 
   # add dark providertile
