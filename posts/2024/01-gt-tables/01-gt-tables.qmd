@@ -128,7 +128,7 @@ towny_tbl <- gt::towny |>
 
 As we delve into the latest enhancements of the `gt` package in R, let's take a moment to appreciate what `gt` tables is and why it has become an indispensable tool for data scientists and analysts.
 
-> `gt`, short for Great Tables, is a powerful R package designed to create rich, customizable tables. It stands out in the R ecosystem for its ability to elegantly handle the presentation aspect of data analysis. With `gt`, users can transform basic data frames into professionally styled tables that are not only informative but also visually compelling.
+> `gt`, short for "grammar of tables", is a powerful R package designed to create rich, customizable tables. It stands out in the R ecosystem for its ability to elegantly handle the presentation aspect of data analysis. With `gt`, users can transform basic data frames into professionally styled tables that are not only informative but also visually compelling.
 
 This package excels in its flexibility and ease of use, allowing for detailed adjustments to table formatting, style, and layout. It supports a variety of functionalities such as merging cells, adding footnotes, integrating conditional formatting, and much more, making it a versatile choice for a wide range of applications.
 
@@ -199,7 +199,7 @@ GSPC_2016_2023 |>
   tab_source_note(source_note = md(
     "Data is sourced from `Yahoo Finance` using the **quantmod** package."
   )) |> 
-  tab_options(table.width = pct(80))
+  tab_options(table.width = pct(100))
 ```
 
 ### Boxplots
