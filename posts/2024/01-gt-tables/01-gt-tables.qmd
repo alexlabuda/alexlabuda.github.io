@@ -155,7 +155,7 @@ Below is an example of a nanoplot (`plot_style = "line"`) in a `gt` table. The p
 ::: {.callout-tip collapse=false}
 ## Hover to reveal data points!
 
-You can hover over the nanoplots below to see the values of the data points. If you hover over the left-most plot of the chart area you can also see the range of values in the plot.
+You can hover over the nanoplots below to see the values of the data points. If you hover over the left-most part of the chart area you can also see the range of values in the plot.
 :::
 
 

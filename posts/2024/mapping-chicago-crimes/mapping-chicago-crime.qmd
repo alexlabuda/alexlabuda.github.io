@@ -118,7 +118,7 @@ chicago_crime_wide_tbl <- chicago_crime_full_tbl |>
 
 
 
-```{r fig.width=7}
+```{r fig.width=8}
 # Calculate the maximum n value with an offset
 max_n_offset <- chicago_crime_full_tbl %>% 
   count(primary_type, sort = TRUE) %>% 
@@ -137,7 +137,7 @@ chicago_crime_full_tbl |>
     labels = scales::comma, 
     limits = c(0, max_n_offset)
     ) +
-  geom_col(fill = "red", color = "darkred", alpha = 0.05, linewidth = 0.2) +
+  geom_col(fill = "#D22B2B", alpha = 0.7, linewidth = 0.2) +
   coord_flip() +
   labs(
     title = NULL,
@@ -154,6 +154,12 @@ chicago_crime_full_tbl |>
 
 ## How do the top 10 crimes compare over the years?
 
+::: {.callout-tip collapse=false}
+## Hover to reveal data points!
+
+You can hover over the nanoplots below to see the values of the data points. If you hover over the left-most part of the chart area you can also see the range of values in the plot.
+:::
+
 ```{r}
 chicago_crime_wide_tbl |>
   arrange(desc(Total)) |>
@@ -168,9 +174,9 @@ chicago_crime_wide_tbl |>
     new_col_name  = "nanoplots",
     new_col_label = md("*2012 - 2015*"),
     options = nanoplot_options(
-      data_line_stroke_color = "#E91E63",
-      data_area_fill_color   = "#E91E63",
-      data_point_fill_color  = "#E91E63"
+      data_line_stroke_color = "#D22B2B",
+      data_area_fill_color   = "#D22B2B",
+      data_point_fill_color  = "#D22B2B"
       )
   ) |>
   # comma format total column
