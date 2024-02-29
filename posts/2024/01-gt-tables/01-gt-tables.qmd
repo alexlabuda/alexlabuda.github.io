@@ -158,8 +158,10 @@ Below is an example of a nanoplot (`plot_style = "line"`) in a `gt` table. The p
 You can hover over the nanoplots below to see the values of the data points. If you hover over the left-most plot of the chart area you can also see the range of values in the plot.
 :::
 
+
 ```{r}
 GSPC_2016_2023 |>
+  rename_with(~ str_remove(., "close_"), starts_with("close_")) |>
   arrange(-year) |>
   gt(rowname_col = "year") |>
   tab_header(
@@ -168,8 +170,9 @@ GSPC_2016_2023 |>
     ) |>
   tab_stubhead(label = md("**Year**")) |>
   cols_nanoplot(
-    columns       = starts_with("close"),
+    columns       = everything(),
     new_col_name  = "nanoplots",
+    autohide = FALSE,
     new_col_label = md("*Monthly Close Price*"),
     options = nanoplot_options(
       data_line_stroke_color = "#E91E63",
@@ -177,17 +180,26 @@ GSPC_2016_2023 |>
       data_point_fill_color  = "#E91E63"
       )
   ) |>
+  cols_hide(columns = c(Feb, Mar, May, Jun, Aug, Sep, Nov, Dec)) |> 
+  fmt_currency(columns = c(Jan:Oct), currency = "USD") |>
+  cols_label(
+    Jan = "Q1",
+    Apr = "Q2",
+    Jul = "Q3",
+    Oct = "Q4"
+  ) |>
   cols_align(align = "center", columns = nanoplots) |>
   tab_footnote(
     footnote = "Source: Yahoo Finance",
     locations = cells_column_labels(columns = nanoplots)
   ) |> 
   opt_align_table_header(align = "left") |>
-  tab_options(heading.padding = px(3)) |> 
+  tab_options(heading.padding = px(3),
+              table.font.size = "14px") |> 
   tab_source_note(source_note = md(
     "Data is sourced from `Yahoo Finance` using the **quantmod** package."
   )) |> 
-  tab_options(table.width = pct(60))
+  tab_options(table.width = pct(80))
 ```
 
 ### Boxplots
